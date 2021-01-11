@@ -1,4 +1,5 @@
 function playGame(playerInput) {
+    clearMessages();
     function getMoveName(argMoveId) {
         if (argMoveId == 1) {
           return 'kamień';
@@ -11,41 +12,58 @@ function playGame(playerInput) {
         printMessage('Nie znam ruchu o id ' + argMoveId + '.');
         return 'nieznany ruch';
       }
-    
-    function displayResult(argComputerMove, argPlayerMove) {
-        if (argComputerMove == 'kamień' && argPlayerMove == 'papier') {
-            printMessage('Ty wygrywasz!');
-        } else if (argComputerMove == 'papier' && argPlayerMove == 'nożyce') {
-            printMessage('Ty wygrywasz!');
-        } else if (argComputerMove == 'nożyce' && argPlayerMove == 'kamień') {
-            printMessage('Ty wygrywasz!');
-        } else if (argComputerMove == 'papier' && argPlayerMove == 'kamień') {
-            printMessage('Komputer wygrał');
-        } else if (argComputerMove == 'nożyce' && argPlayerMove == 'papier') {
-            printMessage('Komputer wygrał');
-        } else if (argComputerMove == 'kamień' && argPlayerMove == 'nożyce') {
-            printMessage('Komputer wygrał');
-        } else if (argComputerMove == argPlayerMove) {
-            printMessage('Remis');
-        } else if (argPlayerMove == 'nieznany ruch') {
-            printMessage('Bląd, Ty wybrałeś nieznany ruch');
-        }
+
+    function displayCompImage(argComputerMove) {
+        switch (argComputerMove) {
+            case 'kamień':
+                printCompImg("images/rock.png");
+                break;
+            case 'papier':
+                printCompImg("images/paper.png");
+                break;
+            case 'nożyce':
+                printCompImg("images/scissors.png");
+                break;
+        }                   
+    }
+
+    function displayPlayerImage(argPlayerMove) {
+        switch (argPlayerMove) {
+            case 'kamień':
+                printPlayerImg("images/rock.png");
+                break;
+            case 'papier':
+                printPlayerImg("images/paper.png");
+                break;
+            case 'nożyce':
+                printPlayerImg("images/scissors.png");
+                break;
+        } 
     }
     
-    let randomNumber = Math.floor(Math.random() * 3 + 1);
+    function displayResult(argComputerMove, argPlayerMove) {
+        (argComputerMove == 'kamień' && argPlayerMove == 'papier') ? printMessage('Ty wygrywasz!') :
+            (argComputerMove == 'papier' && argPlayerMove == 'nożyce') ? printMessage('Ty wygrywasz!') :
+            (argComputerMove == 'nożyce' && argPlayerMove == 'kamień') ? printMessage('Ty wygrywasz!') :
+            (argComputerMove == 'papier' && argPlayerMove == 'kamień') ? printMessage('Komputer wygrał') :
+            (argComputerMove == 'nożyce' && argPlayerMove == 'papier') ? printMessage('Komputer wygrał') :
+            (argComputerMove == 'kamień' && argPlayerMove == 'nożyce') ? printMessage('Komputer wygrał') :
+            (argComputerMove == argPlayerMove) ? printMessage('Remis') : printMessage('Bląd, Ty wybrałeś nieznany ruch');        
+    }    
     
-    console.log('Wylosowana liczba to: ' + randomNumber);
+    let randomNumber = Math.floor(Math.random() * 3 + 1);
     
     let computerMove = getMoveName(randomNumber);
     
     printMessage('Mój ruch to: ' + computerMove);
-        
-    console.log('Gracz wpisał: ' + playerInput);
     
     let playerMove = getMoveName(playerInput);
     
     printMessage('Twój ruch to: ' + playerMove);
-    
+
+    displayCompImage(computerMove);
+    displayPlayerImage(playerMove);
+
     displayResult(computerMove, playerMove);
 }
 
