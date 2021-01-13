@@ -1,6 +1,7 @@
 function playGame(playerInput) {
     clearMessages();
-    function getMoveName(argMoveId) {
+
+    const getMoveName = function (argMoveId) {
         if (argMoveId == 1) {
           return 'kamień';
         } else if (argMoveId == 2) {
@@ -13,7 +14,7 @@ function playGame(playerInput) {
         return 'nieznany ruch';
       }
 
-    function displayCompImage(argComputerMove) {
+    const displayCompImage = function (argComputerMove) {
         switch (argComputerMove) {
             case 'kamień':
                 printCompImg("images/rock.png");
@@ -27,7 +28,7 @@ function playGame(playerInput) {
         }                   
     }
 
-    function displayPlayerImage(argPlayerMove) {
+    const displayPlayerImage = function (argPlayerMove) {
         switch (argPlayerMove) {
             case 'kamień':
                 printPlayerImg("images/rock.png");
@@ -41,7 +42,7 @@ function playGame(playerInput) {
         } 
     }
     
-    function displayResult(argComputerMove, argPlayerMove) {
+    const displayResult = function (argComputerMove, argPlayerMove) {
         (argComputerMove == 'kamień' && argPlayerMove == 'papier') ? printMessage('Ty wygrywasz!') :
             (argComputerMove == 'papier' && argPlayerMove == 'nożyce') ? printMessage('Ty wygrywasz!') :
             (argComputerMove == 'nożyce' && argPlayerMove == 'kamień') ? printMessage('Ty wygrywasz!') :
@@ -51,19 +52,15 @@ function playGame(playerInput) {
             (argComputerMove == argPlayerMove) ? printMessage('Remis') : printMessage('Bląd, Ty wybrałeś nieznany ruch');        
     }    
     
-    let randomNumber = Math.floor(Math.random() * 3 + 1);
+    const randomNumber = Math.floor(Math.random() * 3 + 1),    
+        computerMove = getMoveName(randomNumber),
+        playerMove = getMoveName(playerInput);
     
-    let computerMove = getMoveName(randomNumber);
-    
-    printMessage('Mój ruch to: ' + computerMove);
-    
-    let playerMove = getMoveName(playerInput);
-    
+    printMessage('Mój ruch to: ' + computerMove);   
     printMessage('Twój ruch to: ' + playerMove);
 
     displayCompImage(computerMove);
     displayPlayerImage(playerMove);
-
     displayResult(computerMove, playerMove);
 }
 
